@@ -23,8 +23,11 @@ Or install it yourself as:
 ### Parser
 
 ```ruby
-duration = TimeDuration.parse('0:40')
+duration = TimeDuration.parse('1:10')
 duration.to_s # => "1:10"
+
+duration = TimeDuration.parse('1:70')
+duration.to_s # => "2:10"
 ```
 
 ### Initializer
