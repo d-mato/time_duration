@@ -34,9 +34,9 @@ duration.to_s # => "2:10"
 
 ```ruby
 TimeDuration::Duration.new # => 0:00
-TimeDuration::Duration.new(minutes: 10) # => 0:10
-TimeDuration::Duration.new(hours: 1) # => 1:00
-TimeDuration::Duration.new(hours: 1, minutes: 10) # => 1:10
+TimeDuration::Duration.new(minute: 10) # => 0:10
+TimeDuration::Duration.new(hour: 1) # => 1:00
+TimeDuration::Duration.new(hour: 1, minute: 10) # => 1:10
 ```
 
 ### Operations

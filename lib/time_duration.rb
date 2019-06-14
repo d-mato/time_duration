@@ -1,4 +1,4 @@
-require "time_duration/version"
+require 'time_duration/version'
 
 module TimeDuration
   def self.parse(args)
@@ -8,44 +8,44 @@ module TimeDuration
   class Duration
     include Comparable
 
-    attr_accessor :seconds
+    attr_accessor :second
 
     # TODO: format指定できるようにする
-    def self.parse(time_as_string)
-      hours, minutes = time_as_string.split(':').map(&:to_i)
-      new(hours: hours, minutes: minutes)
+    def self.parse(time_as_string, format: '%H:%M')
+      hour, minute = time_as_string.split(':').map(&:to_i)
+      new(hour: hour, minute: minute)
     end
 
-    def initialize(hours: 0, minutes: 0, seconds: 0)
-      hours = hours.to_i
-      minutes = minutes.to_i
-      seconds = seconds.to_i
-      @seconds = hours * 3600 + minutes * 60 + seconds
+    def initialize(hour: 0, minute: 0, second: 0)
+      hour = hour.to_i
+      minute = minute.to_i
+      second = second.to_i
+      @second = hour * 3600 + minute * 60 + second
     end
 
-    def hours
-      minutes / 60 + seconds / 3600
+    def hour
+      minute / 60 + second / 3600
     end
 
-    def minutes
-      (seconds / 60) % 60
+    def minute
+      (second / 60) % 60
     end
 
     # TODO: format指定できるようにする
     def to_s
-      "%d:%02d" % [hours, minutes]
+      "%d:%02d" % [hour, minute]
     end
 
     def +(time_duration)
-      self.class.new(seconds: seconds + time_duration.seconds)
+      self.class.new(second: second + time_duration.second)
     end
 
     def -(time_duration)
-      self.class.new(seconds: seconds - time_duration.seconds)
+      self.class.new(second: second - time_duration.second)
     end
 
     def <=>(time_duration)
-      self.seconds <=> time_duration.seconds
+      self.second <=> time_duration.second
     end
 
     # override
