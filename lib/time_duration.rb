@@ -5,6 +5,18 @@ module TimeDuration
     Duration.parse(args)
   end
 
+  def self.hour(hour)
+    Duration.new(hour: hour)
+  end
+
+  def self.minute(minute)
+    Duration.new(minute: minute)
+  end
+
+  def self.second(second)
+    Duration.new(second: second)
+  end
+
   class Duration
     include Comparable
 

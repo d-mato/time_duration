@@ -39,6 +39,12 @@ TimeDuration::Duration.new(hour: 1) # => 1:00
 TimeDuration::Duration.new(hour: 1, minute: 10) # => 1:10
 ```
 
+#### Shorthands
+```ruby
+TimeDuration.hour(8) # => 8:00
+TimeDuration.minute(8) # => 0:08
+```
+
 ### Operations
 
 ```ruby
