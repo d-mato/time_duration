@@ -27,7 +27,7 @@ module TimeDuration
 
     # TODO: format指定できるようにする
     def to_s
-      "%d:%02d" % [hour, minute]
+      '%d:%02d' % [hour, minute]
     end
 
     def +(time_duration)
