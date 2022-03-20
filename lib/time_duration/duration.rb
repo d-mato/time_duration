@@ -2,7 +2,7 @@ module TimeDuration
   class Duration
     include Comparable
 
-    attr_accessor :second
+    attr_reader :second
 
     # TODO: format指定できるようにする
     def self.parse(time_as_string, format: '%H:%M')
