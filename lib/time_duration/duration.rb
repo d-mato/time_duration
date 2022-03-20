@@ -18,16 +18,16 @@ module TimeDuration
     end
 
     def hour
-      minute / 60 + second / 3600
+      minute / 60 + second.abs / 3600
     end
 
     def minute
-      (second / 60) % 60
+      (second.abs / 60) % 60
     end
 
     # TODO: format指定できるようにする
     def to_s
-      '%d:%02d' % [hour, minute]
+      "#{'-' if second < 0}%d:%02d" % [hour, minute]
     end
 
     def +(time_duration)
