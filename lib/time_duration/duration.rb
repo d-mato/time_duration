@@ -10,8 +10,9 @@ module TimeDuration
 
     # TODO: format指定できるようにする
     def self.parse(time_as_string, format: '%H:%M') # rubocop:disable Lint/UnusedMethodArgument
-      hour, minute = time_as_string.split(':').map(&:to_i)
-      new(hour: hour, minute: minute)
+      sign = time_as_string.start_with?('-') ? -1 : 1
+      hour, minute = time_as_string.delete_prefix('-').split(':').map(&:to_i)
+      new(hour: sign * hour, minute: sign * minute)
     end
 
     def initialize(hour: 0, minute: 0, second: 0)
