@@ -22,7 +22,7 @@ module TimeDuration
     end
 
     def hour
-      (minute / 60) + (second.abs / 3600)
+      second.abs / 3600
     end
 
     def minute
