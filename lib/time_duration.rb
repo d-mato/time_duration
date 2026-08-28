@@ -6,8 +6,8 @@ require 'time_duration/duration'
 # Durations of time that can be parsed, formatted, added, subtracted and
 # compared. A duration is not a clock time and is never wrapped around a day.
 module TimeDuration
-  def self.parse(args)
-    Duration.parse(args)
+  def self.parse(time_as_string)
+    Duration.parse(time_as_string)
   end
 
   def self.hour(hour)
