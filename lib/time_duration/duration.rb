@@ -1,4 +1,6 @@
 module TimeDuration
+  # A length of time, held internally as a number of seconds. It may be
+  # negative, and hours are not capped: 50 hours formats as "50:00".
   class Duration
     include Comparable
 
