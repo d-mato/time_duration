@@ -42,5 +42,41 @@ RSpec.describe TimeDuration::Duration do
     it '0:60 <=> 1:00 => 0' do
       expect(TimeDuration.parse('0:60') <=> TimeDuration.parse('1:00')).to be 0
     end
+
+    it '0:40 <=> 3600 => nil' do
+      expect(TimeDuration.parse('0:40') <=> 3600).to be_nil
+    end
+  end
+
+  describe :eql? do
+    it '0:60 eql? 1:00 => true' do
+      expect(TimeDuration.parse('0:60').eql?(TimeDuration.parse('1:00'))).to be true
+    end
+
+    it '0:60 eql? 0:30 => false' do
+      expect(TimeDuration.parse('0:60').eql?(TimeDuration.parse('0:30'))).to be false
+    end
+
+    it '0:60 eql? 3600 => false' do
+      expect(TimeDuration.parse('0:60').eql?(3600)).to be false
+    end
+  end
+
+  describe :hash do
+    it 'equal durations share a hash key' do
+      table = { TimeDuration.parse('0:60') => :an_hour }
+      expect(table[TimeDuration.parse('1:00')]).to be :an_hour
+    end
+
+    it 'equal durations collapse under uniq' do
+      durations = [TimeDuration.parse('0:60'), TimeDuration.parse('1:00')]
+      expect(durations.uniq.size).to eq 1
+    end
+  end
+
+  describe :== do
+    it '0:40 == 3600 => false' do
+      expect(TimeDuration.parse('0:40') == 3600).to be false
+    end
   end
 end

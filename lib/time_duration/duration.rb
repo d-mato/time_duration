@@ -43,7 +43,17 @@ module TimeDuration
     end
 
     def <=>(other)
+      return unless other.is_a?(Duration)
+
       second <=> other.second
+    end
+
+    def eql?(other)
+      other.is_a?(Duration) && second == other.second
+    end
+
+    def hash
+      [Duration, second].hash
     end
 
     # override
