@@ -11,6 +11,21 @@ RSpec.describe TimeDuration do
       duration = TimeDuration.parse('1:70')
       expect(duration.to_s).to eq '2:10'
     end
+
+    it '-0:30 => -0:30' do
+      duration = TimeDuration.parse('-0:30')
+      expect(duration.to_s).to eq '-0:30'
+    end
+
+    it '-1:30 => -1:30' do
+      duration = TimeDuration.parse('-1:30')
+      expect(duration.to_s).to eq '-1:30'
+    end
+
+    it 'reads back what to_s writes' do
+      duration = TimeDuration.parse('0:00') - TimeDuration.parse('1:30')
+      expect(TimeDuration.parse(duration.to_s)).to eq duration
+    end
   end
 
   describe :hour do

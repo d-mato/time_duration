@@ -79,4 +79,24 @@ RSpec.describe TimeDuration::Duration do
       expect(TimeDuration.parse('0:40') == 3600).to be false
     end
   end
+
+  describe :hour do
+    it '50:00 => 50' do
+      expect(TimeDuration.parse('50:00').hour).to eq 50
+    end
+
+    it '-1:30 => 1' do
+      expect(TimeDuration::Duration.new(minute: -90).hour).to eq 1
+    end
+  end
+
+  describe :minute do
+    it '50:00 => 0' do
+      expect(TimeDuration.parse('50:00').minute).to eq 0
+    end
+
+    it '-1:30 => 30' do
+      expect(TimeDuration::Duration.new(minute: -90).minute).to eq 30
+    end
+  end
 end
