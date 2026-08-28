@@ -1,11 +1,15 @@
+# frozen_string_literal: true
+
 module TimeDuration
+  # A length of time, held internally as a number of seconds. It may be
+  # negative, and hours are not capped: 50 hours formats as "50:00".
   class Duration
     include Comparable
 
     attr_reader :second
 
     # TODO: format指定できるようにする
-    def self.parse(time_as_string, format: '%H:%M')
+    def self.parse(time_as_string, format: '%H:%M') # rubocop:disable Lint/UnusedMethodArgument
       hour, minute = time_as_string.split(':').map(&:to_i)
       new(hour: hour, minute: minute)
     end
@@ -14,11 +18,11 @@ module TimeDuration
       hour = hour.to_i
       minute = minute.to_i
       second = second.to_i
-      @second = hour * 3600 + minute * 60 + second
+      @second = (hour * 3600) + (minute * 60) + second
     end
 
     def hour
-      minute / 60 + second.abs / 3600
+      (minute / 60) + (second.abs / 3600)
     end
 
     def minute
@@ -27,19 +31,19 @@ module TimeDuration
 
     # TODO: format指定できるようにする
     def to_s
-      "#{'-' if second < 0}%d:%02d" % [hour, minute]
+      format("#{'-' if second.negative?}%d:%02d", hour, minute)
     end
 
-    def +(time_duration)
-      self.class.new(second: second + time_duration.second)
+    def +(other)
+      self.class.new(second: second + other.second)
     end
 
-    def -(time_duration)
-      self.class.new(second: second - time_duration.second)
+    def -(other)
+      self.class.new(second: second - other.second)
     end
 
-    def <=>(time_duration)
-      self.second <=> time_duration.second
+    def <=>(other)
+      second <=> other.second
     end
 
     # override

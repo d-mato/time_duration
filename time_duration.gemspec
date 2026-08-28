@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 require_relative 'lib/time_duration/version'
 
 Gem::Specification.new do |spec|
   spec.name          = 'time-duration'
   spec.version       = TimeDuration::VERSION
-  spec.authors       = ["Daiki Matoba"]
-  spec.email         = ["telnetstat@gmail.com"]
+  spec.authors       = ['Daiki Matoba']
+  spec.email         = ['telnetstat@gmail.com']
 
-  spec.summary       = %q{This module provides functions for expressing durations}
+  spec.summary       = 'This module provides functions for expressing durations'
   spec.description   = <<~DESCRIPTION
     TimeDuration parses strings like '1:10' into values that can be added,
     subtracted and compared. They are durations, not clock times: 50:00
@@ -28,7 +30,7 @@ Gem::Specification.new do |spec|
         f.start_with?(*%w[bin/ spec/ .github/ .gitignore .rspec .ruby-version Gemfile])
     end
   end
-  spec.bindir        = "exe"
+  spec.bindir        = 'exe'
   spec.executables   = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
-  spec.require_paths = ["lib"]
+  spec.require_paths = ['lib']
 end
