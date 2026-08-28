@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe TimeDuration::Duration do
   describe :+ do
     it '0:40 + 0:30 = 1:10' do
@@ -34,7 +36,7 @@ RSpec.describe TimeDuration::Duration do
     end
 
     it '0:30 <=> 0:40 => -1' do
-      expect(TimeDuration.parse('0:30') <=> TimeDuration.parse('0:40')).to be -1
+      expect(TimeDuration.parse('0:30') <=> TimeDuration.parse('0:40')).to be(-1)
     end
 
     it '0:60 <=> 1:00 => 0' do

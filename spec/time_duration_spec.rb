@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe TimeDuration do
   describe :parse do
     it '1:10 => 1:10' do

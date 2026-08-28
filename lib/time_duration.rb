@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'time_duration/version'
 require 'time_duration/duration'
 
