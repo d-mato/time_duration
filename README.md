@@ -1,74 +1,76 @@
 # TimeDuration
 
-## Installation
+[![Gem Version](https://img.shields.io/gem/v/time-duration)](https://rubygems.org/gems/time-duration)
+[![Test](https://github.com/d-mato/time_duration/actions/workflows/test.yml/badge.svg)](https://github.com/d-mato/time_duration/actions/workflows/test.yml)
 
-Add this line to your application's Gemfile:
+Lengths of time, as opposed to clock times. Hours are never wrapped around a day, so fifty hours stays `50:00`.
+
+## Installation
 
 ```ruby
 gem 'time-duration'
 ```
 
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install time-duration
-
 ## Usage
 
-
-
-### Parser
+### Parsing
 
 ```ruby
-duration = TimeDuration.parse('1:10')
-duration.to_s # => "1:10"
-
-duration = TimeDuration.parse('1:70')
-duration.to_s # => "2:10"
+TimeDuration.parse('1:10')   # => 1:10
+TimeDuration.parse('1:70')   # => 2:10
+TimeDuration.parse('-1:30')  # => -1:30
 ```
 
-### Initializer
+### Building
 
 ```ruby
-TimeDuration::Duration.new # => 0:00
-TimeDuration::Duration.new(minute: 10) # => 0:10
-TimeDuration::Duration.new(hour: 1) # => 1:00
-TimeDuration::Duration.new(hour: 1, minute: 10) # => 1:10
+TimeDuration::Duration.new                       # => 0:00
+TimeDuration::Duration.new(minute: 10)           # => 0:10
+TimeDuration::Duration.new(hour: 1, minute: 10)  # => 1:10
 ```
 
-#### Shorthands
+Shorthands for a single unit:
+
 ```ruby
-TimeDuration.hour(8) # => 8:00
-TimeDuration.minute(8) # => 0:08
+TimeDuration.hour(8)     # => 8:00
+TimeDuration.minute(8)   # => 0:08
+TimeDuration.second(90)  # => 0:01
 ```
 
-### Operations
+### Arithmetic
 
 ```ruby
-duration = TimeDuration.parse('0:40') + TimeDuration.parse('0:30')
-duration.to_s # => "1:10"
-
-duration = TimeDuration.parse('0:40') - TimeDuration.parse('0:30')
-duration.to_s # => "0:10"
+TimeDuration.parse('0:40') + TimeDuration.parse('0:30')   # => 1:10
+TimeDuration.parse('0:40') - TimeDuration.parse('0:30')   # => 0:10
+TimeDuration.parse('0:00') - TimeDuration.parse('0:01')   # => -0:01
+TimeDuration.parse('50:00') + TimeDuration.parse('50:00') # => 100:00
 ```
 
-### Comparisons
+### Comparison
 
 ```ruby
-TimeDuration.parse('0:40') > TimeDuration.parse('0:30') # => true
+TimeDuration.parse('0:40') > TimeDuration.parse('0:30')   # => true
+TimeDuration.parse('0:60') == TimeDuration.parse('1:00')  # => true
+```
 
-TimeDuration.parse('0:60') == TimeDuration.parse('1:00') # => true
+Durations that compare equal are also equal as hash keys:
+
+```ruby
+[TimeDuration.parse('0:60'), TimeDuration.parse('1:00')].uniq.size  # => 1
 ```
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+Run `bin/setup` to install dependencies, `bundle exec rake` to run the specs and RuboCop, and `bin/console` for an IRB session with the gem loaded.
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+## Releasing
+
+Run the [Release workflow](https://github.com/d-mato/time_duration/actions/workflows/release.yml) and choose a version bump. It tags the version, drafts the release notes, and publishes to RubyGems.org through trusted publishing.
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/time_duration.
+Bug reports and pull requests are welcome at https://github.com/d-mato/time_duration.
+
+## License
+
+Released under the [MIT License](LICENSE.txt).
