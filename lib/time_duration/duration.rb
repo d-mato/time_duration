@@ -8,8 +8,7 @@ module TimeDuration
 
     attr_reader :second
 
-    # TODO: format指定できるようにする
-    def self.parse(time_as_string, format: '%H:%M') # rubocop:disable Lint/UnusedMethodArgument
+    def self.parse(time_as_string)
       sign = time_as_string.start_with?('-') ? -1 : 1
       hour, minute = time_as_string.delete_prefix('-').split(':').map(&:to_i)
       new(hour: sign * hour, minute: sign * minute)
@@ -30,7 +29,6 @@ module TimeDuration
       (second.abs / 60) % 60
     end
 
-    # TODO: format指定できるようにする
     def to_s
       format("#{'-' if second.negative?}%d:%02d", hour, minute)
     end
