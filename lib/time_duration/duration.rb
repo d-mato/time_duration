@@ -43,6 +43,8 @@ module TimeDuration
     end
 
     def <=>(other)
+      return unless other.is_a?(Duration)
+
       second <=> other.second
     end
 
