@@ -29,7 +29,6 @@ module TimeDuration
       (second.abs / 60) % 60
     end
 
-    # TODO: format指定できるようにする
     def to_s
       format("#{'-' if second.negative?}%d:%02d", hour, minute)
     end
