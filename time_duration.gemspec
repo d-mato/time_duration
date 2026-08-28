@@ -7,7 +7,11 @@ Gem::Specification.new do |spec|
   spec.email         = ["telnetstat@gmail.com"]
 
   spec.summary       = %q{This module provides functions for expressing durations}
-  spec.description   = %q{This module provides functions for expressing durations}
+  spec.description   = <<~DESCRIPTION
+    TimeDuration parses strings like '1:10' into values that can be added,
+    subtracted and compared. They are durations, not clock times: 50:00
+    stays fifty hours instead of wrapping around a day.
+  DESCRIPTION
   spec.homepage      = 'https://github.com/d-mato/time_duration'
   spec.license       = 'MIT'
   spec.required_ruby_version = '>= 3.3.0'
