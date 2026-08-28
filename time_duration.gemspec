@@ -16,6 +16,10 @@ Gem::Specification.new do |spec|
   spec.license       = 'MIT'
   spec.required_ruby_version = '>= 3.3.0'
 
+  spec.metadata['source_code_uri'] = spec.homepage
+  spec.metadata['bug_tracker_uri'] = "#{spec.homepage}/issues"
+  spec.metadata['rubygems_mfa_required'] = 'true'
+
   # Specify which files should be added to the gem when it is released.
   gemspec = File.basename(__FILE__)
   spec.files = IO.popen(%w[git ls-files -z], chdir: __dir__, err: IO::NULL) do |ls|
